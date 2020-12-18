@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Weather App</title>
+</head>
+
+<body>
+
+    <div class="container-fluid row justify-content-center">
+
+        <div class=row>
+            <div class="header">
+                <h1> Weather Dashboard</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hospitalform-group col ">
+                <form id="weather-form">
+                    <label for="weather-input">Search for the weather in a city!</label>
+
+                    <input type="text" id="weather-input" class="form-control float-left"
+                        placeholder="Type City Name Here">
+
+                    <button id="add-weather" type="submit" class="btn btn-primary btn-lg float-right"> <i
+                            class="fas fa-search-location"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid row ">
+        <div class="displayWeather col-md-9 bg-light">
+            <h2 class="justify-content-center text-dark" id="cityName"></h2>
+            <div class="row">
+                <div class="col-6">
+                    <p id="currentDate"></p>
+                    <p id="city"></p>
+                    <img id="weatherIcon"></img>
+                    <p id="temperature"></p>
+                    <p id="humidity"></p>
+                    <p id="wind"></p>
+                    <p id="UV"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="forecastDiv">
+
+        </div>
+    </div>
+  
+
+
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="./style.css">
+
+
+
+
+
+
+</body>
+
+</html>
