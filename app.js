@@ -12,16 +12,15 @@ function getCurrentWeatherInfo() {
         console.log(response)
 
        displayCurrentWeather(response);
-       getForecast(response)
-
-       storedLastWeather(cityName);
+  
+       storedLastWeather(response);
 
     });
 }
 
 $("#add-weather").on("click", function(event){
     event.preventDefault();
-
+    // getForecast();
     getCurrentWeatherInfo();
 
     })
@@ -31,7 +30,7 @@ function displayCurrentWeather(weather) {
 
 $("#city").text(weather.name)
 // check string
-$("#currentDate").text(new Date(weather.dt * 1000).toLocaleTimeString())
+$("#currentDate").text(new Date(weather.dt * 1000).toLocaleDateString())
 
 var iconcode = weather.weather[0].icon;
 var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
@@ -45,32 +44,26 @@ $("#wind").text(weather.wind.speed)
 
 }
     
-function getForecast(cityName) {
+// function getForecast() {
+  
+    
+//         for (var i = 0; i < 6; i++) {
 
-    var forecastURL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + cityName + "&appid=e6f3f6bbf7d2faca7164fbf775f8f8cf";
+//         var date= new Date((response.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
+//         var iconDay= response.list[((i+1)*8)-1].weather[0].icon;
+//         var iconIMG="https://openweathermap.org/img/wn/"+iconDay+".png";
+//         var tempF=(((tempK-273.5)*1.80)+32).toFixed(2);
+//         var humidity= response.list[((i+1)*8)-1].main.humidity;
 
-    $.ajax({
-        url: forecastURL,
-        method: "GET"
-    }).then(function (response) {
-        for (i = 0; i < 6; i++) {
+//         $("#fDate"+i).text(date);
+//             $("#fImg"+i).text("<img src="+iconIMG+">");
+//             $("#fTemp"+i).text(tempF+"&#8457");
+//             $("#fHumidity"+i).text(humidity+"%");
+//         }
+      
+// }
 
-        var date= new Date((response.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
-        var iconDay= response.list[((i+1)*8)-1].weather[0].icon;
-        var iconIMG="https://openweathermap.org/img/wn/"+iconDay+".png";
-        var tempF=(((tempK-273.5)*1.80)+32).toFixed(2);
-        var humidity= response.list[((i+1)*8)-1].main.humidity;
 
-        $("#fDate"+i).html(date);
-            $("#fImg"+i).html("<img src="+iconIMG+">");
-            $("#fTemp"+i).html(tempF+"&#8457");
-            $("#fHumidity"+i).html(humidity+"%");
-        }
-        
-
-    });
-
-}
 
 // function displayForecast() {
 // $("#day1")

@@ -15,32 +15,34 @@
 
     <div class="container-fluid row justify-content-center">
 
-        <div class=row>
-            <div class="header">
-                <h1> Weather Dashboard</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="hospitalform-group col ">
-                <form id="weather-form">
-                    <label for="weather-input">Search for the weather in a city!</label>
+        <div class="header">
+            <img src="images/pero-kalimero-9BJRGlqoIUk-unsplash.jpg" class="rounded-circle" alt="clouds"
+                style="width:50%;">
 
-                    <input type="text" id="weather-input" class="form-control float-left"
-                        placeholder="Type City Name Here">
-
-                    <button id="add-weather" type="submit" class="btn btn-primary btn-lg float-right"> <i
-                            class="fas fa-search-location"></i></button>
-                </form>
-            </div>
+            <h1 class="centered">Weather Dashboard</h1>
         </div>
     </div>
 
     <div class="container-fluid row ">
-        <div class="displayWeather col-md-9 bg-light">
+        <div class="form-group col-md-6 ">
+            <form id="weather-form">
+                <label for="weather-input">Search for the weather in a city!</label>
+
+                <input type="text" id="weather-input" class="form-control float-left" placeholder="Type City Name Here">
+
+                <button id="add-weather" type="submit" class="btn btn-primary btn-lg float-right"> <i
+                        class="fas fa-search-location"></i></button>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="container-fluid row ">
+        <div class="col-md-6 bg-light">
             <h2 class="justify-content-center text-dark" id="cityName"></h2>
             <div class="row">
                 <div class="col-6">
-                    <p id="currentDate"></p>
+                    <p id="currentDate">Date:</p>
                     <p id="city"></p>
                     <img id="weatherIcon"></img>
                     <p id="temperature"></p>
@@ -51,49 +53,15 @@
             </div>
         </div>
 
-        <div class="col-sm-12" id ="future-weather">
-            <h3>5-Day Forecast:</h3>
-            <div class="row text-light">
-                <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
-                    <p id="fDate0"></p>
-                    <p id="fImg0"></p>
-                    <p>Temp:<span id="fTemp0"></span></p>
-                    <p>Humidity:<span id="fHumidity0"></span></p>
-                </div>
-                <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
-                    <p id="fDate1"></p>
-                    <p id="fImg1"></p>
-                    <p>Temp:<span id="fTemp1"></span></p>
-                    <p>Humidity:<span id="fHumidity1"></span></p>
-                </div>
-                <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded">
-                    <p id="fDate2"></p>
-                    <p id="fImg2"></p>
-                    <p>Temp:<span id="fTemp2"></span></p>
-                    <p>Humidity:<span id="fHumidity2"></span></p>
-                </div>
-                <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded">
-                    <p id="fDate3"></p>
-                    <p id="fImg3"></p>
-                    <p>Temp:<span id="fTemp3"></span></p>
-                    <p>Humidity:<span id="fHumidity3"></span></p>
-                </div>
-                <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
-                    <p id="fDate4"></p>
-                    <p id="fImg4"></p>
-                    <p>Temp:<span id="fTemp4"></span></p>
-                    <p>Humidity:<span id="fHumidity4"></span></p>
-                </div>
-            </div>
-        </div> <!-- <div class="forecastDiv">
-            <div class= "col" id="day1"></div> 
-            <div class= "col" id="day2"></div> 
-            <div class= "col" id="day3"></div> 
-            <div class= "col" id="day4"></div> 
-            <div class= "col" id="day5"></div> 
+        <div class="forecastDiv card">
+            <div class="col card-body" id="day1"></div>
+            <div class="col card-body" id="day2"></div>
+            <div class="col card-body" id="day3"></div>
+            <div class="col card-body" id="day4"></div>
+            <div class="col card-body" id="day5"></div>
         </div>
     </div>
-   -->
+
 
 
     <script src="app.js"></script>
