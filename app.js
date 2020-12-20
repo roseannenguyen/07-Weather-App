@@ -1,11 +1,8 @@
 var userCityInput = [];
 
+
 function getCurrentWeatherInfo() {
-
-    
-     var cityName = $("#weather-input").val()
-    
-
+    var cityName = $("#weather-input").val()
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=111bd09519012867035e16b4e2d0ebd1";
 
     $.ajax({
@@ -15,6 +12,7 @@ function getCurrentWeatherInfo() {
         console.log(response)
 
        displayCurrentWeather(response);
+       getForecast(response)
 
        storedLastWeather(cityName);
 
@@ -23,8 +21,6 @@ function getCurrentWeatherInfo() {
 
 $("#add-weather").on("click", function(event){
     event.preventDefault();
-
-    
 
     getCurrentWeatherInfo();
 
@@ -49,6 +45,39 @@ $("#wind").text(weather.wind.speed)
 
 }
     
+function getForecast(cityName) {
+
+    var forecastURL = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + cityName + "&appid=e6f3f6bbf7d2faca7164fbf775f8f8cf";
+
+    $.ajax({
+        url: forecastURL,
+        method: "GET"
+    }).then(function (response) {
+        for (i = 0; i < 6; i++) {
+
+        var date= new Date((response.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
+        var iconDay= response.list[((i+1)*8)-1].weather[0].icon;
+        var iconIMG="https://openweathermap.org/img/wn/"+iconDay+".png";
+        var tempF=(((tempK-273.5)*1.80)+32).toFixed(2);
+        var humidity= response.list[((i+1)*8)-1].main.humidity;
+
+        $("#fDate"+i).html(date);
+            $("#fImg"+i).html("<img src="+iconIMG+">");
+            $("#fTemp"+i).html(tempF+"&#8457");
+            $("#fHumidity"+i).html(humidity+"%");
+        }
+        
+
+    });
+
+}
+
+// function displayForecast() {
+// $("#day1")
+// }
+
+
+// empty method 
 // function displayUVInfo() {
 
 //     var latitude = weather.coord.lat;
