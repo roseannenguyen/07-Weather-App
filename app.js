@@ -37,9 +37,10 @@ var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
 $("#weatherIcon").attr("src", iconurl)
 
 // math
-$("#temperature").text(weather.main.temp)
+$("#temperature").text(((weather.main.temp - 273.15) * 1.80 + 32).toFixed(0));
+
 $("#humidity").text(weather.main.humidity)
-$("#wind").text(weather.wind.speed)
+$("#wind").text((weather.wind.speed*2.237).toFixed(0))
 
 
 }
