@@ -14,10 +14,7 @@
 <body>
 
     <div class="container-fluid row justify-content-center">
-
-        <div class="jumbotron header">
-            <h1 class="card-top text-center">Weather Dashboard</h1>
-        </div>
+            <h1 class="navbar navbar-dark bg-slate-grey">Weather Dashboard</h1>
     </div>
 
     <div class="container-fluid row ">
@@ -31,7 +28,7 @@
                         class="fas fa-search-location"></i></button>
             </form>
         </div>
-    
+
 
         <div class="col-md-6 bg-light">
             <h2 class="justify-content-center text-dark" id="cityName"></h2>
@@ -47,20 +44,44 @@
                 </div>
             </div>
         </div>
-    </div>   
+    </div>
 
-    <div id="forecast" class=" row ">
-            <div class="col-sm mt-5 " id="day1">test</div>
-            <div class="col-sm mt-5 " id="day2">test</div>
-            <div class="col-sm mt-5 " id="day3">test</div>
-            <div class="col-sm mt-5 " id="day4">test</div>
-            <div class="col-sm mt-5 " id="day5">test</div>
+    <div id="forecastDays" class=" row ">
+        <div class="card-header" id="day1">Test</div>
+        <div class="card-body">
+            <img id="icon1"></img>
+            <p id="temp1" class="card-text"></p>
+            <p id="humidity1" class="card-text"></p>
+        </div>
+        <div class="card-header" id="day2">test</div>
+        <div class="card-body">
+            <img id="icon2"></img>
+            <p id="temp2" class="card-text"></p>
+            <p id="humidity2" class="card-text"></p>
+        </div>
+        <div class="card-header" id="day3">test</div>
+        <div class="card-body">
+            <img id="icon3"></img>
+            <p id="temp3" class="card-text"></p>
+            <p id="humidity3" class="card-text"></p>
+        </div>
+        <div class="card-header" id="day4">test</div>
+        <div class="card-body">
+            <img id="icon4"></img>
+            <p id="temp4" class="card-text"></p>
+            <p id="humidity4" class="card-text"></p>
+        </div>
+        <div class="card-header" id="day5">test</div>
+        <div class="card-body">
+            <img id="icon5"></img>
+            <p id="temp5" class="card-text"></p>
+            <p id="humidity5" class="card-text"></p>
+        </div>
     </div>
 
 
     <script src="app.js"></script>
     <link rel="stylesheet" href="./style.css">
-
 
 
 
