@@ -1,5 +1,5 @@
 var userCityInput = [];
-
+let tempEl = $(".temp");
 
 function getCurrentWeatherInfo() {
     var cityName = $("#weather-input").val()
@@ -14,13 +14,14 @@ function getCurrentWeatherInfo() {
         displayCurrentWeather(response);
         getUVInfo(response)
         storedLastWeather(response);
+        
 
     });
 }
 
 $("#add-weather").on("click", function (event) {
     event.preventDefault();
-    // getForecast();
+    getForecast();
     getCurrentWeatherInfo();
 
 })
@@ -62,42 +63,24 @@ function getUVInfo(weather) {
 }
 
 
-
 function getForecast() {
-
-    var UVqueryURL = "http://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=111bd09519012867035e16b4e2d0ebd1"
+    var cityName = $("#weather-input").val()
+    var forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast/?q=" + cityName +" &units=imperial&appid=111bd09519012867035e16b4e2d0ebd1"
 
     $.ajax({
-        url: UVqueryURL,
+        url: forecastQueryURL,
         method: "GET"
-    }).done(function (response) {
+    }).then(function (response) {
         console.log(response)
 
-        $("#UV").text(response.value)
-
-
-    });
-      
-
-}
-
-
-
-// function displayForecast() {
-// $("#day1")
-// }
-
-
-// empty method 
-
-
-// function displayForecast() {
-
-// }
-
-
-// function renderWeather() {
-
+        $("#temp1").text("Temp: " + response.list[1].main.temp + "°F");
+        $("#temp2").text("Temp: " + response.list[2].main.temp + "°F");
+        $("#temp3").text("Temp: " + response.list[3].main.temp + "°F");
+        $("#temp4").text("Temp: " + response.list[4].main.temp + "°F");
+        $("#temp5").text("Temp: " + response.list[5].main.temp + "°F");
+     
+    })
+}   
 
 
 
@@ -117,3 +100,11 @@ function displayDefaultWeather() {
 }
 
 displayDefaultWeather();
+
+
+
+
+
+
+// empty method 
+
