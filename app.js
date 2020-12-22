@@ -89,7 +89,7 @@ function getForecast() {
         console.log(response);
 
         var number = 1;
-        
+
         for (var i = 5; i < response.list.length; i = i + 8) {
             $("#day" + number).text(response.list[i].dt_txt);
             var iconcode = response.list[i].weather[0].icon;
@@ -117,7 +117,7 @@ function displaySearchHistory(response) {
     $("#searchHistory").empty();
     console.log(response)
     // got undefined
-   var savedHistory = JSON.parse(localStorage.getItem("userCityInput"))
+    var savedHistory = JSON.parse(localStorage.getItem("userCityInput"))
     if (savedHistory !== null) {
         userCityInput = savedHistory;
     };
