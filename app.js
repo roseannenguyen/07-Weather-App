@@ -1,5 +1,3 @@
-var userCityInput = [];
-
 function getCurrentWeatherInfo() {
     var cityName = $("#weather-input").val()
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=111bd09519012867035e16b4e2d0ebd1";
@@ -12,20 +10,19 @@ function getCurrentWeatherInfo() {
 
         displayCurrentWeather(response);
         getUVInfo(response)
-        storedLastWeather(response);
-        displaySearchHistory(response);
+        storedLastWeather(cityName);
+        displaySearchHistory(cityName);
 
 
     });
 }
-
 
 $("#add-weather").on("click", function (event) {
     event.preventDefault();
 
     getForecast();
     getCurrentWeatherInfo();
-    // storedLastWeather();
+    storedLastWeather();
     displaySearchHistory();
 
 })
@@ -78,86 +75,56 @@ function getUVInfo(weather) {
 
 
     });
-}
+};
 
 
 function getForecast() {
-    var cityName = $("#weather-input").val()
-    var forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast/?q=" + cityName + " &units=imperial&appid=111bd09519012867035e16b4e2d0ebd1"
+    var cityName = $("#weather-input").val();
+    var forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast/?q=" + cityName + " &units=imperial&appid=111bd09519012867035e16b4e2d0ebd1";
 
     $.ajax({
         url: forecastQueryURL,
         method: "GET"
     }).then(function (response) {
-        console.log("data", response)
+        console.log(response);
 
+        var number = 1;
+        
+        for (var i = 5; i < response.list.length; i = i + 8) {
+            $("#day" + number).text(response.list[i].dt_txt);
+            var iconcode = response.list[i].weather[0].icon;
+            var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+            $("#icon" + number).attr("src", iconurl);
+            $("#temp" + number).text(response.list[i].main.temp);
+            $("#humidity" + number).text(response.list[i].main.humidity);
+            number++;
+        }
+        storedLastWeather(response);
+    });
 
-        $("#day1").text(response.list[0].dt_txt);
-        var iconcode1 = response.list[0].weather[0].icon;
-        var iconurl1 = "http://openweathermap.org/img/w/" + iconcode1 + ".png";
-        $("#icon1").attr("src", iconurl1);
-        $("#temp1").text(response.list[0].main.temp);
-        $("#humidity1").text(response.list[0].main.humidity);
+};
 
+var userCityInput = [];
 
-        $("#day2").text(response.list[8].dt_txt);
-        var iconcode2 = response.list[8].weather[0].icon;
-        var iconurl2 = "http://openweathermap.org/img/w/" + iconcode2 + ".png";
-        $("#icon2").attr("src", iconurl2);
-        $("#temp2").text(response.list[8].main.temp);
-        $("#humidity2").text(response.list[8].main.humidity);
+function storedLastWeather(city) {
+    var city = {};
+    localStorage.setItem("lastCity", city);
 
-        $("#day3").text(response.list[16].dt_txt);
-        var iconcode3 = response.list[16].weather[0].icon;
-        var iconurl3 = "http://openweathermap.org/img/w/" + iconcode3 + ".png";
-        $("#icon3").attr("src", iconurl3);
-        $("#temp3").text(response.list[16].main.temp);
-        $("#humidity3").text(response.list[16].main.humidity);
-
-        $("#day4").text(response.list[24].dt_txt);
-        var iconcode4 = response.list[24].weather[0].icon;
-        var iconurl4 = "http://openweathermap.org/img/w/" + iconcode4 + ".png";
-        $("#icon4").attr("src", iconurl4);
-        $("#temp4").text(response.list[24].main.temp);
-        $("#humidity4").text(response.list[24].main.humidity);
-
-        $("#day5").text(response.list[30].dt_txt);
-        var iconcode5 = response.list[30].weather[0].icon;
-        var iconurl5 = "http://openweathermap.org/img/w/" + iconcode5 + ".png";
-        $("#icon5").attr("src", iconurl5);
-        $("#temp5").text(esponse.list[30].main.temp);
-        $("#humidity5").text(response.list[30].main.humidity);
-
-    })
-}
-
-
-
-function storedLastWeather(response) {
-
-    localStorage.setItem("lastCity", response)
-
-}
-
-function displayDefaultWeather() {
-
-    var lastCity = localStorage.getItem("lastCity")
-    console.log(lastCity)
-
-}
-
-displayDefaultWeather();
+};
 
 
 function displaySearchHistory(response) {
     $("#searchHistory").empty();
-
-    $("#searchHistory").val(localStorage.getItem("response"));
-
-
+    console.log(response)
+    // got undefined
+   var savedHistory = JSON.parse(localStorage.getItem("userCityInput"))
+    if (savedHistory !== null) {
+        userCityInput = savedHistory;
+    };
 
 }
 
+displaySearchHistory()
 
 
 
