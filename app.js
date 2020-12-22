@@ -19,6 +19,7 @@ function getCurrentWeatherInfo() {
     });
 }
 
+
 $("#add-weather").on("click", function (event) {
     event.preventDefault();
     getForecast();
@@ -26,6 +27,7 @@ $("#add-weather").on("click", function (event) {
 
 })
 
+$("#weather-input").empty();
 
 function displayCurrentWeather(weather) {
 
@@ -58,6 +60,19 @@ function getUVInfo(weather) {
 
         $("#UV").text(response.value)
 
+        if (response.value > 8.0) {
+            $("#UV").removeClass().addClass("badge badge-danger");
+        }
+        else if (6.0 <= response.value && response.value < 8.0) {
+            $("#UV").removeClass().addClass("badge badge-warning");
+        }
+        else if (3.0 <= response.value && response.value < 6.0) {
+            $("#UV").removeClass().addClass("badge badge-warning");
+        }
+        else if (response.value < 3.0) {
+            $("#UV").removeClass().addClass("badge badge-success");
+        };
+
 
     });
 }
@@ -72,12 +87,24 @@ function getForecast() {
         method: "GET"
     }).then(function (response) {
         console.log(response)
+        
+        var response = response.list;
 
-        $("#temp1").text("Temp: " + response.list[1].main.temp + "°F");
-        $("#temp2").text("Temp: " + response.list[2].main.temp + "°F");
-        $("#temp3").text("Temp: " + response.list[3].main.temp + "°F");
-        $("#temp4").text("Temp: " + response.list[4].main.temp + "°F");
-        $("#temp5").text("Temp: " + response.list[5].main.temp + "°F");
+        for (let i = 0; i = response.list.length; i++) {
+    
+        $(`#temp${i}`).text("Temp: " + response.list[i].main.temp + "°F");
+        }
+        // $("#day2").text(response.list[i].dt_txt);
+        // $("#temp2").text("Temp: " + response.list[i].main.temp + "°F");
+
+        // $("#day3").text(response.list[16].dt_txt);
+        // $("#temp3").text("Temp: " + response.list[16].main.temp + "°F");
+
+        // $("#day4").text(response.list[16].dt_txt);
+        // $("#temp4").text("Temp: " + response.list[24].main.temp + "°F");
+
+        // $("#day5").text(response.list[16].dt_txt);
+        // $("#temp5").text("Temp: " + response.list[30].main.temp + "°F");
      
     })
 }   
