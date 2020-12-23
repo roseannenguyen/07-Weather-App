@@ -1,5 +1,6 @@
-function getCurrentWeatherInfo() {
-    var cityName = $("#weather-input").val()
+function getCurrentWeatherInfo(cityName) {
+
+
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=111bd09519012867035e16b4e2d0ebd1";
 
     $.ajax({
@@ -19,11 +20,10 @@ function getCurrentWeatherInfo() {
 
 $("#add-weather").on("click", function (event) {
     event.preventDefault();
+    var city = $("#weather-input").val()
 
     getForecast();
-    getCurrentWeatherInfo();
-    storedLastWeather();
-    displaySearchHistory();
+    getCurrentWeatherInfo(city);
 
 })
 
@@ -99,32 +99,53 @@ function getForecast() {
             $("#humidity" + number).text(response.list[i].main.humidity);
             number++;
         }
-        storedLastWeather(response);
+
     });
 
 };
 
-var userCityInput = [];
+
 
 function storedLastWeather(city) {
-    var city = {};
+    console.log(city)
     localStorage.setItem("lastCity", city);
-
+    var savedHistory = JSON.parse(localStorage.getItem("cities"))
+    console.log(savedHistory)
+    if (savedHistory === null) {
+        savedHistory = [];
+        console.log(savedHistory)
+    };
+    savedHistory.push(city)
+   
+    console.log(savedHistory)
+    localStorage.setItem("cities", JSON.stringify(savedHistory))
 };
 
 
-function displaySearchHistory(response) {
+function displaySearchHistory() {
     $("#searchHistory").empty();
-    console.log(response)
-    // got undefined
-    var savedHistory = JSON.parse(localStorage.getItem("userCityInput"))
-    if (savedHistory !== null) {
-        userCityInput = savedHistory;
+    var savedHistory = JSON.parse(localStorage.getItem("cities"))
+    
+    if (savedHistory === null) {
+        savedHistory = [];
     };
 
+    for (var i = 0; i < savedHistory.length; i++) {
+        var button = $("<button>")
+        button.text(savedHistory[i])
+        button.addClass("btn btn-success")
+        $("#searchHistory").append(button)
+    }
 }
 
-displaySearchHistory()
+var city = localStorage.getItem("lastCity")
+if (city !== null) {
+    getCurrentWeatherInfo(city)
+}
+else {
+    displaySearchHistory()
+}
+
 
 
 
