@@ -28,6 +28,7 @@ $("#add-weather").on("click", function (event) {
 })
 
 $("#weather-input").empty();
+$("#add-weather").empty();
 
 function displayCurrentWeather(weather) {
 
